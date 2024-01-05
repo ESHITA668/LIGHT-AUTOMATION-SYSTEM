@@ -1,42 +1,14 @@
 # LIGHT-AUTOMATION-SYSTEM
 c++
-define ldr A0
-int thrs = 100;
-int green = 2;
-int red = 3;
-int Delay = 1000; // delay in ms
-int relay = 4;
-int ir1 = 5;
-int ir2 = 6;
-void setup() {
- pinMode(green, OUTPUT);
- pinMode(red, OUTPUT);
- pinMode(relay, OUTPUT);
- pinMode(ir1, INPUT);
- pinMode(ir2, INPUT);
- Serial.begin(9600);
-}
-void loop() {
- static int count = 0;
- if(digitalRead(ir1) == 0){
- digitalWrite(green, HIGH);
- delay(Delay);
- digitalWrite(green, LOW);
- count++; }
- if(digitalRead(ir2) == 0){
- digitalWrite(red, HIGH);
- delay(Delay);
- digitalWrite(red, LOW);
- count--;
- }
- int lux = analogRead(ldr);
- Serial.print("No of People in room : ");
- Serial.println(count);
- Serial.print("Lux : ");
- Serial.println(lux);
- if((count>0) && (lux<thrs)){
- digitalWrite(relay, HIGH);
-}
- else{
- digitalWrite(relay, LOW); }
-}
+My project counts the no of people enter and 
+exit from the room. Using two PIR sensor side by 
+side I create a SINGLE DOOR COUNTER.
+When a person enter in room my counter counts adds 1.
+If a person exit from the room counter subtracts 1.
+By doing this it can determine no of people present in room. 
+I am also using LDR sensor for detecting light intensity. 
+If no of people is greater than one and light intensity is below selected threshold intensity then light will beturned on. 
+If people is present but light intensity above 
+threshold then lights will not turned on. 
+If light intensity in below selected threshold intensity but 
+there is no people in the room lights will turned off
